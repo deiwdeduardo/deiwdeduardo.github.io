@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursos Multimídia — Cap. 4 / Ativ. 4</title>
+</head>
+<body>
+
+  <header>
+    <h1>Recursos Multimídia do Ambiente Virtual de Aprendizagem</h1>
+  </header>
+
+  <main>
+
+    <!-- Bloco 1 — Vídeo com legenda e poster -->
+    <figure>
+      <video width="800" height="450" controls poster="poster-aula.jpg" preload="metadata">
+        <source src="videos/aula-html.mp4" type="video/mp4">
+        <source src="videos/aula-html.webm" type="video/webm">
+        <track kind="subtitles" src="legendas/aula-html.vtt" srclang="pt" label="Português" default>
+        <p>Seu navegador não suporta a reprodução de vídeo nativo. Você pode <a href="videos/aula-html.mp4">baixar o vídeo aqui</a>.</p>
+      </video>
+      <figcaption>Vídeo demonstrativo sobre introdução ao HTML5. Fonte: Acervo Didático do AVA.</figcaption>
+    </figure>
+
+    <!-- Bloco 2 — Áudio com fallback -->
+    <figure>
+      <audio controls preload="metadata">
+        <source src="audios/podcast-episodio1.mp3" type="audio/mpeg">
+        <source src="audios/podcast-episodio1.ogg" type="audio/ogg">
+        <p>Seu navegador não suporta o elemento de áudio. Você pode <a href="audios/podcast-episodio1.mp3">baixar o áudio aqui</a>.</p>
+      </audio>
+      <figcaption>
+        Episódio 1: Introdução ao Desenvolvimento Web. Consulte a <a href="transcricao.html">transcrição completa em texto</a>.
+      </figcaption>
+    </figure>
+
+    <!-- Bloco 3 — Vídeo externo (YouTube) via <iframe> -->
+    <figure>
+      <iframe 
+        width="800" 
+        height="450" 
+        src="https://www.youtube-nocookie.com/embed/S9uPNppGsGo" 
+        title="Curso de HTML5 e CSS3 - Módulo 1: Capítulo 1 - Gustavo Guanabara / Curso em Vídeo" 
+        loading="lazy" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+      <figcaption>Vídeo "Curso de HTML5 e CSS3 - Módulo 1", publicado pelo canal Curso em Vídeo no YouTube.</figcaption>
+    </figure>
+
+    <!-- Bloco 4 — Imagem responsiva com <picture> -->
+    <figure>
+      <picture>
+        <source media="(min-width: 768px)" srcset="img/banner-wide.jpg">
+        <img src="img/banner-mobile.jpg" alt="Estudante navegando na plataforma de aprendizagem em um ambiente de estudos" width="400" height="300">
+      </picture>
+      <figcaption>Banner promocional do ambiente de aprendizagem ajustado dinamicamente para telas grandes e pequenas.</figcaption>
+    </figure>
+
+  </main>
+
+  <footer>
+    <p>Desenvolvido por: Deiwd Eduardo Marques De Freitas Dorneles | Matrícula: 2026311985 | Data: 05/08/2026</p>
+  </footer>
+
+</body>
+</html>
