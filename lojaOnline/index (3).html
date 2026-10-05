@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ByteCore</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Paleta da logo: preto, azul elétrico e branco */
+    :root[data-bs-theme="dark"] {
+      --bg: #05070D; --panel: #0C111D; --line: #1D2740;
+      --blue: #1F7BFF; --blue-hi: #4DA3FF; --text: #E8EEF8; --muted: #8A97B0;
+      --bs-body-bg: var(--bg); --bs-body-color: var(--text);
+      --bs-tertiary-bg: var(--panel); --bs-secondary-bg: var(--panel);
+      --bs-secondary-color: var(--muted); --bs-border-color: var(--line);
+      --bs-body-font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      --bs-link-color-rgb: 77,163,255;
+    }
+    h1,h2,h3,.btn,.nav-link,.badge { font-family: 'Chakra Petch', sans-serif; }
+    h2,h3 { font-weight: 600; }
+
+    /* Faixa de aviso */
+    .bg-primary { background: var(--blue) !important; color: #fff !important; font-family: 'Chakra Petch', sans-serif; font-weight: 500; letter-spacing: .02em; }
+
+    /* Navbar */
+    .navbar { border-bottom: 1px solid var(--line) !important; }
+    .navbar-brand { margin-right: 1rem; }
+    .logo-navbar { height: 64px; width: auto; display: block; }
+    @media (max-width: 575.98px) { .logo-navbar { height: 48px; } }
+    .nav-link { font-weight: 500; color: var(--muted); }
+    .nav-link:hover, .nav-link.active { color: #fff; }
+    .dropdown-menu { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+    .dropdown-item:hover { background: var(--blue); color: #fff; }
+
+    /* Campos e botões */
+    .form-control { background: var(--panel); border: 1px solid var(--line); color: var(--text); border-radius: 10px; }
+    .form-control:focus { background: var(--panel); color: var(--text); border-color: var(--blue); box-shadow: 0 0 0 3px rgba(31,123,255,.25); }
+    .input-group > .form-control { border-radius: 10px 0 0 10px; }
+    .input-group > .btn { border-radius: 0 10px 10px 0; }
+    .btn { font-weight: 600; border-radius: 10px; transition: background .15s, box-shadow .15s; }
+    .btn-light, .btn-primary, .btn-secondary { background: var(--blue); border: 1px solid var(--blue); color: #fff; }
+    .btn-light:hover, .btn-primary:hover, .btn-secondary:hover { background: var(--blue-hi); border-color: var(--blue-hi); color: #05070D; box-shadow: 0 0 18px rgba(31,123,255,.55); }
+    .btn-outline-secondary { color: var(--text); border-color: var(--line); }
+    .btn-outline-secondary:hover { background: var(--panel); border-color: var(--blue); color: #fff; }
+    .navbar-toggler { border: 1px solid var(--line); }
+    .btn:focus-visible, .nav-link:focus-visible, a:focus-visible { outline: 2px solid var(--blue-hi); outline-offset: 2px; }
+
+    /* Títulos de seção: barra azul à esquerda */
+    main h2 { font-size: 1.6rem !important; padding-left: .8rem; border-left: 4px solid var(--blue); line-height: 1.1; }
+
+    /* Cartões */
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+    .card-produto { transition: border-color .2s, box-shadow .2s; }
+    .card-produto:hover { border-color: var(--blue); box-shadow: 0 0 24px rgba(31,123,255,.3); }
+    .card-img-top { border-bottom: 1px solid var(--line); aspect-ratio: 3 / 2; object-fit: cover; }
+    .badge.bg-danger { background: var(--blue) !important; color: #fff; border-radius: 6px; font-weight: 600; z-index: 2; }
+    #badge-carrinho { background: var(--blue) !important; color: #fff; }
+    .text-muted, .text-decoration-line-through { color: var(--muted) !important; }
+
+    /* Categorias */
+    .icone-categoria { width: 72px; height: 72px; font-size: 2rem; background: var(--bg) !important; border: 1px solid var(--blue); box-shadow: 0 0 14px rgba(31,123,255,.35); }
+    section .col-4 .card { transition: border-color .2s; }
+    section .col-4 .card:hover { border-color: var(--blue); }
+
+    /* Carrossel, banners, benefícios */
+    .carousel-item img { min-height: 220px; object-fit: cover; }
+    @media (min-width: 992px) { .carousel-item img { height: 560px; } }
+    .img-fluid.rounded { aspect-ratio: 12 / 5; object-fit: cover; }
+    .carousel-inner, .img-fluid.rounded { border: 1px solid var(--line); border-radius: 16px !important; }
+    #carrosselBanners { border-radius: 16px; box-shadow: 0 0 40px rgba(31,123,255,.18); }
+    .carousel-indicators [data-bs-target] { background-color: var(--blue-hi); height: 4px; }
+    .bg-body-tertiary.rounded { border: 1px solid var(--line); border-radius: 16px !important; }
+
+    /* Rodapé */
+    footer { border-top: 1px solid var(--line) !important; }
+    footer h3 { color: var(--blue-hi); font-size: 1rem; }
+    footer .text-secondary { color: var(--muted) !important; }
+    footer a:hover { color: var(--blue-hi) !important; }
+
+    .modal-content { background: var(--panel); border: 1px solid var(--blue); border-radius: 16px; box-shadow: 0 0 40px rgba(31,123,255,.3); }
+    .modal-header, .modal-footer { border-color: var(--line); }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  </style>
+</head>
+<body>
+
+  <!-- 1. FAIXA DE AVISO -->
+  <div class="bg-primary text-white text-center py-2">
+    Frete grátis acima de R$ 999 e até 12x sem juros
+  </div>
+
+  <!-- 2. NAVBAR -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
+    <div class="container">
+      <a class="navbar-brand p-0" href="#"><img src="logo.png" alt="ByteCore" class="logo-navbar"></a>
+
+      <!-- Carrinho + hambúrguer (celular: 1ª linha, à direita) -->
+      <div class="d-flex align-items-center gap-2 order-1 order-lg-3 ms-auto ms-lg-0">
+        <button class="btn btn-outline-secondary position-relative" type="button" aria-label="Carrinho">
+          🛒
+          <span id="badge-carrinho" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+        </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#menuPrincipal" aria-controls="menuPrincipal"
+                aria-expanded="false" aria-label="Abrir menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <!-- Busca (celular: linha própria) -->
+      <form class="d-flex order-2 order-lg-2 w-100 mt-2 mt-lg-0 mx-lg-3" style="max-width: 420px;" role="search">
+        <input class="form-control me-2" type="search" placeholder="Buscar produtos..." aria-label="Buscar">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+      </form>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse order-3 order-lg-1" id="menuPrincipal">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Início</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Notebooks</a></li>
+              <li><a class="dropdown-item" href="#">Desktops</a></li>
+              <li><a class="dropdown-item" href="#">Monitores</a></li>
+              <li><a class="dropdown-item" href="#">Periféricos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- 3. CARROSSEL -->
+    <div id="carrosselBanners" class="carousel slide my-4" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carrosselBanners" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carrosselBanners" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carrosselBanners" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner rounded">
+        <div class="carousel-item active">
+          <picture>
+            <source media="(max-width: 575.98px)" srcset="imagens/notebooks-mobile.jpg">
+            <img src="imagens/notebooks-desktop.jpg" class="d-block w-100" alt="Notebooks gamer">
+          </picture>
+        </div>
+        <div class="carousel-item">
+          <img src="https://cupomgamer.com.br/wp-content/uploads/2025/05/terabyte-monte-seu-pc.webp" class="d-block w-100" alt="Monte seu PC">
+        </div>
+        <div class="carousel-item">
+          <picture>
+            <source media="(max-width: 575.98px)" srcset="imagens/monitores-mobile.jpg">
+            <img src="imagens/monitores-desktop.jpg" class="d-block w-100" alt="Ofertas em monitores">
+          </picture>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carrosselBanners" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carrosselBanners" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+
+    <!-- 4. CATEGORIAS: 4 por linha no desktop, 3 no celular -->
+    <section class="mb-5">
+      <h2 class="h5 mb-3">Categorias</h2>
+      <div class="row">
+        <div class="col-4 col-lg-3 text-center mb-3">
+          <div class="card h-100 py-3">
+            <div class="icone-categoria rounded-circle bg-body-secondary d-flex align-items-center justify-content-center mx-auto">💻</div>
+            <p class="mt-2 mb-0 small">Notebooks</p>
+          </div>
+        </div>
+        <div class="col-4 col-lg-3 text-center mb-3">
+          <div class="card h-100 py-3">
+            <div class="icone-categoria rounded-circle bg-body-secondary d-flex align-items-center justify-content-center mx-auto">🖥️</div>
+            <p class="mt-2 mb-0 small">Desktops</p>
+          </div>
+        </div>
+        <div class="col-4 col-lg-3 text-center mb-3">
+          <div class="card h-100 py-3">
+            <div class="icone-categoria rounded-circle bg-body-secondary d-flex align-items-center justify-content-center mx-auto">📺</div>
+            <p class="mt-2 mb-0 small">Monitores</p>
+          </div>
+        </div>
+        <div class="col-4 col-lg-3 text-center mb-3">
+          <div class="card h-100 py-3">
+            <div class="icone-categoria rounded-circle bg-body-secondary d-flex align-items-center justify-content-center mx-auto">⌨️</div>
+            <p class="mt-2 mb-0 small">Periféricos</p>
+          </div>
+        </div>
+        <div class="col-4 col-lg-3 text-center mb-3">
+          <div class="card h-100 py-3">
+            <div class="icone-categoria rounded-circle bg-body-secondary d-flex align-items-center justify-content-center mx-auto">💾</div>
+            <p class="mt-2 mb-0 small">Armazenamento</p>
+          </div>
+        </div>
+        <div class="col-4 col-lg-3 text-center mb-3">
+          <div class="card h-100 py-3">
+            <div class="icone-categoria rounded-circle bg-body-secondary d-flex align-items-center justify-content-center mx-auto">🧠</div>
+            <p class="mt-2 mb-0 small">Memória RAM</p>
+          </div>
+        </div>
+        <div class="col-4 col-lg-3 text-center mb-3">
+          <div class="card h-100 py-3">
+            <div class="icone-categoria rounded-circle bg-body-secondary d-flex align-items-center justify-content-center mx-auto">🎮</div>
+            <p class="mt-2 mb-0 small">Placas de vídeo</p>
+          </div>
+        </div>
+        <div class="col-4 col-lg-3 text-center mb-3">
+          <div class="card h-100 py-3">
+            <div class="icone-categoria rounded-circle bg-body-secondary d-flex align-items-center justify-content-center mx-auto">🌐</div>
+            <p class="mt-2 mb-0 small">Redes</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. DESTAQUES: 4 (lg) / 2 (md) / 1 (celular) por linha -->
+    <section class="mb-5">
+      <div class="d-flex justify-content-between align-items-baseline mb-3">
+        <h2 class="h5 mb-0">Destaques</h2>
+        <a href="#" class="small">Ver todos</a>
+      </div>
+      <div class="row">
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card h-100 card-produto" data-bs-toggle="modal" data-bs-target="#modalProduto"
+               data-nome="Notebook Gamer 15,6" RTX" data-preco="R$ 7.299,00" data-antigo="R$ 7.599,00"
+               data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ_3w0Mi8usIMFTY_dEyGkNAeJzC7C8Zo-EOOD0EIfKQ&s=10"
+               data-desc="Notebook com Ryzen 7, 16 GB de RAM, SSD de 512 GB e placa de vídeo RTX 4050.">
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">Promoção</span>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ_3w0Mi8usIMFTY_dEyGkNAeJzC7C8Zo-EOOD0EIfKQ&s=10" class="card-img-top" alt="Notebook Gamer 15,6" RTX">
+            <div class="card-body d-flex flex-column">
+              <h3 class="h6 card-title">Notebook Gamer 15,6" RTX</h3>
+              <small class="text-muted text-decoration-line-through">R$ 7.599,00</small>
+              <p class="fw-bold fs-5 mb-3">R$ 7.299,00</p>
+              <button class="btn btn-light mt-auto btn-add">Adicionar ao carrinho</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card h-100 card-produto" data-bs-toggle="modal" data-bs-target="#modalProduto"
+               data-nome="Monitor 27" 144 Hz" data-preco="R$ 779,00" data-antigo=""
+               data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWHqkKBIXtWQW_GGawT5PzVGtBeuzIrDCUol9fJreNHw&s"
+               data-desc="Monitor Full HD com painel IPS, 144 Hz e tempo de resposta de 1 ms.">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWHqkKBIXtWQW_GGawT5PzVGtBeuzIrDCUol9fJreNHw&s" class="card-img-top" alt="Monitor 27" 144 Hz">
+            <div class="card-body d-flex flex-column">
+              <h3 class="h6 card-title">Monitor 27" 144 Hz</h3>
+              <small class="text-muted">&nbsp;</small>
+              <p class="fw-bold fs-5 mb-3">R$ 779,00</p>
+              <button class="btn btn-light mt-auto btn-add">Adicionar ao carrinho</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card h-100 card-produto" data-bs-toggle="modal" data-bs-target="#modalProduto"
+               data-nome="SSD WD Black SN850X 1 TB" data-preco="R$ 2.499,99" data-antigo="R$ 2.941,10"
+               data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrvAuT0jYIUhbk-E-p1tG8i0B-YB63RjikkBI4zOu7rQ&s=10"
+               data-desc="SSD M.2 NVMe PCIe 4.0 com leitura de até 7.300 MB/s e gravação de até 6.300 MB/s.">
+            <span class="badge bg-danger position-absolute top-0 start-0 m-2">Promoção</span>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrvAuT0jYIUhbk-E-p1tG8i0B-YB63RjikkBI4zOu7rQ&s=10" class="card-img-top" alt="SSD WD Black SN850X 1 TB">
+            <div class="card-body d-flex flex-column">
+              <h3 class="h6 card-title">SSD WD Black SN850X 1 TB</h3>
+              <small class="text-muted text-decoration-line-through">R$ 2.941,10</small>
+              <p class="fw-bold fs-5 mb-3">R$ 2.499,99</p>
+              <button class="btn btn-light mt-auto btn-add">Adicionar ao carrinho</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card h-100 card-produto" data-bs-toggle="modal" data-bs-target="#modalProduto"
+               data-nome="Teclado Mecânico RGB" data-preco="R$ 189,90" data-antigo=""
+               data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSypQ5NdQs-uD0CdjdaKWb4lklD6ODbiqR9wiv8Atsaww&s=10"
+               data-desc="Teclado mecânico com switches azuis, iluminação RGB e layout ABNT2.">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSypQ5NdQs-uD0CdjdaKWb4lklD6ODbiqR9wiv8Atsaww&s=10" class="card-img-top" alt="Teclado Mecânico RGB">
+            <div class="card-body d-flex flex-column">
+              <h3 class="h6 card-title">Teclado Mecânico RGB</h3>
+              <small class="text-muted">&nbsp;</small>
+              <p class="fw-bold fs-5 mb-3">R$ 189,90</p>
+              <button class="btn btn-light mt-auto btn-add">Adicionar ao carrinho</button>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </section>
+
+    <!-- 6. BANNERS PROMOCIONAIS (6 + 6) -->
+    <section class="mb-5">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <img src="https://cupomgamer.com.br/wp-content/uploads/2025/05/terabyte-monte-seu-pc.webp" class="img-fluid rounded w-100" alt="Monte seu PC do seu jeito">
+        </div>
+        <div class="col-md-6 mb-3">
+          <img src="imagens/banner-upgrade.jpg" class="img-fluid rounded w-100" alt="Upgrade de memória e SSD">
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. BENEFÍCIOS (4 + 4 + 4) -->
+    <section class="bg-body-tertiary rounded py-4 px-3 mb-5">
+      <div class="row">
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="d-flex align-items-center">
+            <span class="fs-2 me-3">🚚</span>
+            <span>Entrega para todo o Brasil</span>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0">
+          <div class="d-flex align-items-center">
+            <span class="fs-2 me-3">🔒</span>
+            <span>Pagamento seguro</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="d-flex align-items-center">
+            <span class="fs-2 me-3">🛡️</span>
+            <span>Garantia de 1 ano</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. NEWSLETTER -->
+    <section class="text-center mb-5">
+      <h2 class="h5 mb-3">Receba nossas ofertas</h2>
+      <form class="mx-auto" style="max-width: 420px;">
+        <div class="input-group">
+          <input type="email" class="form-control" placeholder="seu@email.com" aria-label="E-mail">
+          <button class="btn btn-light" type="submit">Assinar</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- 9. RODAPÉ (3 + 3 + 3 + 3) -->
+  <footer class="bg-body-tertiary border-top pt-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 mb-3">
+          <h3 class="h6">Institucional</h3>
+          <ul class="list-unstyled small">
+            <li><a href="#" class="text-decoration-none text-secondary">Sobre nós</a></li>
+            <li><a href="#" class="text-decoration-none text-secondary">Trabalhe conosco</a></li>
+            <li><a href="#" class="text-decoration-none text-secondary">Política de privacidade</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-3">
+          <h3 class="h6">Ajuda</h3>
+          <ul class="list-unstyled small">
+            <li><a href="#" class="text-decoration-none text-secondary">Central de atendimento</a></li>
+            <li><a href="#" class="text-decoration-none text-secondary">Trocas e devoluções</a></li>
+            <li><a href="#" class="text-decoration-none text-secondary">Rastrear pedido</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-3">
+          <h3 class="h6">Redes sociais</h3>
+          <ul class="list-unstyled small">
+            <li><a href="#" class="text-decoration-none text-secondary">Instagram</a></li>
+            <li><a href="#" class="text-decoration-none text-secondary">Facebook</a></li>
+            <li><a href="#" class="text-decoration-none text-secondary">YouTube</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 mb-3">
+          <h3 class="h6">Formas de pagamento</h3>
+          <ul class="list-unstyled small text-secondary">
+            <li>Cartão de crédito</li>
+            <li>Pix</li>
+            <li>Boleto</li>
+          </ul>
+        </div>
+      </div>
+      <p class="text-center small text-secondary border-top py-3 mb-0">© 2026 ByteCore — CNPJ 00.000.000/0001-00</p>
+    </div>
+  </footer>
+
+  <!-- MODAL DE DETALHES DO PRODUTO -->
+  <div class="modal fade" id="modalProduto" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="modalTitulo">Produto</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <img id="modalImg" src="" class="img-fluid rounded mb-3" alt="">
+          <p id="modalDesc"></p>
+          <small id="modalAntigo" class="text-muted text-decoration-line-through"></small>
+          <p id="modalPreco" class="fw-bold fs-4 mb-0"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-light" id="modalAdd" data-bs-dismiss="modal">Adicionar ao carrinho</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const badge = document.getElementById('badge-carrinho');
+    const somarCarrinho = () => { badge.textContent = Number(badge.textContent) + 1; };
+
+    // Botão "Adicionar ao carrinho" dos cartões (não abre o modal)
+    document.querySelectorAll('.btn-add').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        somarCarrinho();
+      });
+    });
+
+    // Preenche o modal com os dados do cartão clicado
+    document.getElementById('modalProduto').addEventListener('show.bs.modal', e => {
+      const d = e.relatedTarget.dataset;
+      document.getElementById('modalTitulo').textContent = d.nome;
+      document.getElementById('modalImg').src = d.img;
+      document.getElementById('modalImg').alt = d.nome;
+      document.getElementById('modalDesc').textContent = d.desc;
+      document.getElementById('modalAntigo').textContent = d.antigo;
+      document.getElementById('modalPreco').textContent = d.preco;
+    });
+
+    document.getElementById('modalAdd').addEventListener('click', somarCarrinho);
+  </script>
+</body>
+</html>
