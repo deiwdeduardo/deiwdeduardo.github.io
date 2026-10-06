@@ -1,0 +1,80 @@
+/* Paleta da logo: preto, azul elétrico e branco */
+:root[data-bs-theme="dark"] {
+  --bg: #05070D; --panel: #0C111D; --line: #1D2740;
+  --blue: #1F7BFF; --blue-hi: #4DA3FF; --text: #E8EEF8; --muted: #8A97B0;
+  --bs-body-bg: var(--bg); --bs-body-color: var(--text);
+  --bs-tertiary-bg: var(--panel); --bs-secondary-bg: var(--panel);
+  --bs-secondary-color: var(--muted); --bs-border-color: var(--line);
+  --bs-body-font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  --bs-link-color-rgb: 77,163,255;
+}
+h1,h2,h3,.btn,.nav-link,.badge { font-family: 'Chakra Petch', sans-serif; }
+h2,h3 { font-weight: 600; }
+
+/* Faixa de aviso */
+.bg-primary { background: var(--blue) !important; color: #fff !important; font-family: 'Chakra Petch', sans-serif; font-weight: 500; letter-spacing: .02em; }
+
+/* Navbar */
+.navbar { border-bottom: 1px solid var(--line) !important; }
+.navbar-brand { margin-right: 1rem; }
+.logo-navbar { height: 64px; width: auto; display: block; }
+@media (max-width: 575.98px) { .logo-navbar { height: 48px; } }
+.nav-link { font-weight: 500; color: var(--muted); }
+.nav-link:hover, .nav-link.active { color: #fff; }
+.dropdown-menu { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+.dropdown-item:hover { background: var(--blue); color: #fff; }
+
+/* Busca e newsletter (antes eram estilos inline) */
+.form-busca { max-width: 420px; }
+.form-newsletter { max-width: 420px; }
+
+/* Campos e botões */
+.form-control { background: var(--panel); border: 1px solid var(--line); color: var(--text); border-radius: 10px; }
+.form-control:focus { background: var(--panel); color: var(--text); border-color: var(--blue); box-shadow: 0 0 0 3px rgba(31,123,255,.25); }
+.input-group > .form-control { border-radius: 10px 0 0 10px; }
+.input-group > .btn { border-radius: 0 10px 10px 0; }
+.btn { font-weight: 600; border-radius: 10px; transition: background .15s, box-shadow .15s; }
+.btn-light, .btn-primary, .btn-secondary { background: var(--blue); border: 1px solid var(--blue); color: #fff; }
+.btn-light:hover, .btn-primary:hover, .btn-secondary:hover { background: var(--blue-hi); border-color: var(--blue-hi); color: #05070D; box-shadow: 0 0 18px rgba(31,123,255,.55); }
+.btn-outline-secondary { color: var(--text); border-color: var(--line); }
+.btn-outline-secondary:hover { background: var(--panel); border-color: var(--blue); color: #fff; }
+.navbar-toggler { border: 1px solid var(--line); }
+.btn:focus-visible, .nav-link:focus-visible, a:focus-visible { outline: 2px solid var(--blue-hi); outline-offset: 2px; }
+
+/* Títulos de seção: barra azul à esquerda */
+main h2 { font-size: 1.6rem !important; padding-left: .8rem; border-left: 4px solid var(--blue); line-height: 1.1; }
+
+/* Cartões */
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.card-produto { transition: border-color .2s, box-shadow .2s; }
+.card-produto:hover { border-color: var(--blue); box-shadow: 0 0 24px rgba(31,123,255,.3); }
+.card-img-top { border-bottom: 1px solid var(--line); aspect-ratio: 3 / 2; object-fit: cover; }
+.badge.bg-danger { background: var(--blue) !important; color: #fff; border-radius: 6px; font-weight: 600; z-index: 2; }
+#badge-carrinho { background: var(--blue) !important; color: #fff; }
+.text-muted, .text-decoration-line-through { color: var(--muted) !important; }
+
+/* Categorias */
+.icone-categoria { width: 72px; height: 72px; font-size: 2rem; background: var(--bg) !important; border: 1px solid var(--blue); box-shadow: 0 0 14px rgba(31,123,255,.35); }
+section .col-4 .card { transition: border-color .2s; }
+section .col-4 .card:hover { border-color: var(--blue); }
+
+/* Carrossel, banners, benefícios */
+.carousel-item img { min-height: 220px; object-fit: cover; }
+@media (min-width: 992px) { .carousel-item img { height: 560px; } }
+.img-fluid.rounded { aspect-ratio: 12 / 5; object-fit: cover; }
+.carousel-inner, .img-fluid.rounded { border: 1px solid var(--line); border-radius: 16px !important; }
+#carrosselBanners { border-radius: 16px; box-shadow: 0 0 40px rgba(31,123,255,.18); }
+.carousel-indicators [data-bs-target] { background-color: var(--blue-hi); height: 4px; }
+.bg-body-tertiary.rounded { border: 1px solid var(--line); border-radius: 16px !important; }
+
+/* Rodapé */
+footer { border-top: 1px solid var(--line) !important; }
+footer h3 { color: var(--blue-hi); font-size: 1rem; }
+footer .text-secondary { color: var(--muted) !important; }
+footer a:hover { color: var(--blue-hi) !important; }
+
+/* Modal */
+.modal-content { background: var(--panel); border: 1px solid var(--blue); border-radius: 16px; box-shadow: 0 0 40px rgba(31,123,255,.3); }
+.modal-header, .modal-footer { border-color: var(--line); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
